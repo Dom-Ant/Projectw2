@@ -1,0 +1,146 @@
+1. What I worked on since last scrum
+2. What I will work on till next scrum
+3. Any issues? (Optional)
+
+2023-10-09
+Dominique Anthony
+1. Brainstormed database and functionality of website
+2. Continue thinking about how the website functions
+technologies needed, database structure, user stories, Hosting, cloud database
+Set up trello
+3. Need help with discussion.
+
+Shaunpaul Anthony
+1. Hosting, seating, other react tutorials. Use vite instead create-react-app.
+2. Set up react skeleton with VITE, hosting with CI/CD
+3. May have issues linking web server, db
+
+Pejman
+1. Watching tutorials
+2. Working on new mockups, process of visiting the website
+3. Database hosting difficulty
+
+2023-10-10
+Dominique Anthony
+1. watch tutorials, update trello,
+2. Update trello, work on components
+3. Discuss technologies
+
+Pejman
+1. Mockups revised in detail, tutorials
+2. Database queries, start on admin page, tutorials
+3. Database/login connection
+
+Shaunpaul
+1. Initial react structure, tutorials
+2. Implement hosting for the front-end/back-end
+3. May have issues with hosting/connecting
+
+2023-10-11
+Pejman
+1- Foreign keys of database
+2- CRUD operations for the "Admin" page
+
+Dominique Anthony
+1. watch tutorials
+2. work on components
+
+Shaunpaul Anthony
+1. Work on hosting (web, database, s3), bug fixes
+2. continue hosting, header, seating chart
+3. none at this time
+
+2023-10-12
+Pejman
+1. Foreign keys of database
+2. Continuing CRUD operations for the "Admin" page
+
+Dominique
+1. tutorials, components, images
+2. form components
+
+Shaunpaul
+1. seating chart functional from front-end
+2. seating component called at appropriate area with styling, database linking
+
+2023-10-13
+Pejman
+1- Creating new users, new movies, new tickets, new show times, new theater rooms by admins
+   Deleting users, movies, tickets, show times, theater rooms by admins
+2. uploading images, allow admin edit movies, other admin CRUD operations, foreign keys of database
+3. issues connecting tables of database by foreign keys
+
+Dominique
+1. tutorials
+2. forms, user stories
+3. cloud
+
+Shaunpaul
+1. seating chart functionality
+2. login component, with jsonwebtoken and bcrypt
+3. unsure how to link seating chart with database
+
+2023-10-14
+Pejman
+1. uploading images to the server side
+2. removing "add user" part from admin page
+    add editing function for admins
+    profile page for admins
+3. showing the uploaded image in the front-end
+
+Dominique
+1. cloud hosting
+2. cloud hosting
+
+Shaunpaul
+1 - login and register with hashing and auth, update db structure
+2 - move login route, update sequelize connections, seating chart integration
+3 - no expected issues at the moment
+
+2023-10-15
+Dominique
+1. cloud database, .env file
+2. user stories
+
+Pejman
+1. finishing editing part for admins
+2. show admins info in their profile page
+    admins should be able to change their profile page
+    admins should be able to add/remove theatre rooms for movies
+
+Shaunpaul
+1. updated server models for new db structure, authRoutes
+2. fix login/register for cloud hosted db
+    admin navbar to admin pages only
+    restrict access by role
+
+2023-10-16
+Shaunpaul
+1. login/register update, change in app.js depreciated code,
+    restrict and navigate away access to admin authRoutes
+2. fetch showtimes for a movie_id, set up My Profile page for users
+3. Having an issue with needing to reload after login/logout for proper routing/access
+
+Dominique
+1. s3
+2. s3 image upload for user profiles and movie posters
+3. heroku
+
+Pejman
+1. edit the elements on the client side
+2. hide/unhide comments, profile of the admin
+3. issues with updating functionality
+
+2023-10-17
+Dominique
+1. s3 image hosting
+2. s3 better image saving, presigned urls
+
+Pejman
+1. Profile page of the admin/managers
+2. table format of the data in the admin panel
+
+Shaunpaul
+1. showtimes for a specific movie displayed, CSS
+2. need to add thumbnail_url to movies table, and first name, last name fields for users table
+3. likely will need to add seats table

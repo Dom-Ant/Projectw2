@@ -1,0 +1,343 @@
+.App {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.post {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 1px solid lightgray;
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.post:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+.post .title {
+  flex: 25%;
+  border-bottom: 1px solid lightgray;
+  background-color: rgb(35, 0, 190);
+  display: grid;
+  place-content: center;
+  color: white;
+}
+
+.post .body {
+  flex: 45%;
+  display: grid;
+  background-color: rgb(13, 240, 240);
+  place-content: center;
+  text-align: center;
+}
+
+.post .body2 {
+  flex: 45%;
+  display: grid;
+  background-color: rgb(255, 255, 255);
+  place-content: center;
+}
+
+.post .footer {
+  flex: 30%;
+  border-top: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: rgb(35, 0, 190);
+  color: white;
+  place-content: center;
+}
+
+/* CREATE POST PAGE CSS */
+
+.createPostPage {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid dodgerblue;
+  border-radius: 5px;
+}
+
+.formContainer #inputCreatePost {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.formContainer button {
+  margin-top: 15px;
+  height: 40px;
+  border: none;
+  background-color: lightskyblue;
+  border-radius: 5px;
+  color: white;
+}
+
+.formContainer button:hover {
+  cursor: pointer;
+  background-color: dodgerblue;
+}
+
+span {
+  color: red;
+}
+
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: rgb(35, 0, 190);
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+/* INDIVIDUAL POST */
+.postPage {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.leftSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+}
+
+.rightSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide .addCommentContainer {
+  flex: 20%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 25px;
+}
+
+.addCommentContainer input,
+button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
+
+.addCommentContainer button {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.addCommentContainer input {
+  border: 2px solid dodgerblue;
+}
+
+.rightSide .listOfComments {
+  flex: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listOfComments .comment {
+  width: 70%;
+  height: auto;
+  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#individual {
+  height: 500px;
+  width: 600px;
+}
+
+#individual .title,
+#individual .footer {
+  font-size: 30px;
+}
+
+#individual .body {
+  font-size: 25px;
+}
+
+/* LOGIN / REGISTER */
+
+.loginContainer, .registerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.loginContainer input,
+.loginContainer button,
+.registerContainer input,
+.registerContainer button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  margin: 10px;
+}
+
+.loginContainer button,
+.registerContainer button {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.loginContainer input,
+.registerContainer input {
+  border: 2px solid dodgerblue;
+}
+
+.logoutbtn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  width: 80px;
+  background-color: rgb(203, 73, 138);
+  place-content: center;
+  margin-left:30px;
+}
+
+.navbarbtn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  background-color: rgb(35, 0, 190);
+  place-content: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+}
+
+.addbtn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  width: 200px;
+  background-color: rgb(35, 0, 190);
+  place-content: center;
+  margin-top:30px;
+  color: white;
+}
+
+.editbtn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  width: 100px;
+  background-color: rgb(0, 140, 78);
+  place-content: center;
+  margin-top:2px;
+  margin-bottom: 2px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+}
+
+.deletebtn {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  width: 100px;
+  background-color: rgb(140, 0, 0);
+  place-content: center;
+  margin-top:2px;
+  margin-bottom: 2px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  border: 3px solid #ffffff;
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  background-color: rgb(117, 201, 250);
+}
+
+td {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(205, 235, 253);
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
+}
