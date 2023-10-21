@@ -22,17 +22,24 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegisterPage';
 import UserMovies from './pages/UserMovies';
 import MovieDetails from './pages/MovieDetails';
-import jwtDecode from 'jwt-decode';
+import { useAuth } from './authContext';
 
-function useUserRole() {
+/* function useUserRole() {
     const token = getStoredToken();
     const decodeToken = token ? jwtDecode(token) : null; // decode JWT if exists
     return decodeToken ? decodeToken.role : null; // check if decodeToken exists or return null
-}
+} */
+
+// function useUserId() {
+//     const token = getStoredToken();
+//     const userId = token ? jwtDecode(token) : null;
+//     return userId ? userId.id : null; // check if decodeToken exists or return null
+// }
 
 function AdminNavbar() {
     const location = useLocation();
     const navigate = useNavigate();
+    const { setCurrentUser } = useAuth();
 
     if (!location.pathname.startsWith('/admin')) {
         return null;
@@ -41,7 +48,7 @@ function AdminNavbar() {
     const handleLogout = () => {
         // Remove the JWT from storage
         localStorage.removeItem('token');
-        window.location.reload();
+        setCurrentUser(null);
         navigate('/login');
     }
 
@@ -59,12 +66,15 @@ function AdminNavbar() {
     );
 }
 
-function getStoredToken() {
+/* function getStoredToken() {
     return localStorage.getItem('token');
 }
-
+ */
 function App() {
-    const userRole = useUserRole();
+    const { currentUser } = useAuth();
+    const userRole = currentUser ? currentUser.role : null;
+    /* const userRole = useUserRole(); */
+    // const userId = useUserId();
 
     return (
         <div className="App">

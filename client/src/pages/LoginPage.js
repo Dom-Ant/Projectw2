@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import {Link, useNavigate} from 'react-router-dom';
 import Header from '../components/Header';
 import '../App.css';
+import { useAuth } from '../authContext';
 import jwtDecode from 'jwt-decode';
 
 const LoginPage = () => {
@@ -15,17 +16,22 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
+    const { login } = useAuth();
+
     const handleLogin = async (values) => {
         try {
             const response = await axios.post('http://localhost:3001/users/login', values);
             if (response.data.success) {
                 alert('Login successful');
-                localStorage.setItem('token', response.data.token);
+                const decodedUser = jwtDecode(response.data.token);
+                login(response.data.token);
 
-                const userRole = jwtDecode(response.data.token).role;
+                const userRole = decodedUser.role;
+                const userId = decodedUser.id;
 
                 if (userRole === 'Admin' || userRole === 'Manager') {
-                    navigate('/admin');
+                    console.log(response.data.token);
+                    navigate('/admin/' + userId);
                 } else if (userRole === 'User') {
                     navigate('/movies');
                 } else {

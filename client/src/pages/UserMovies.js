@@ -22,22 +22,22 @@ function UserMovies() {
 
     return (
         <>
-        <Header />
-        <div>
-            <h2>Movies</h2>
-            <div className="movieList">
-                {movies.map(movie => (
-                    <div key={movie.id} className="movieCard">
-                        <img src={movie.poster_url} alt={movie.title} />
-                        <p>Genre: {movie.genre}</p>
-                        <p>Duration: {movie.duration} minutes</p>
-                        <button>
-                        <Link to={`/movies/${movie.id}`}>Details</Link>
-                        </button>
-                    </div>
-                ))}
+            <Header />
+            <div>
+                <h2>Movies</h2>
+                <div className="movieList">
+                    {movies.map(movie => (
+                        <div key={movie.id} className="movieCard">
+                            <img src={movie.poster_thumbnail_url} alt={movie.title} />
+                            <p>Genre: {movie.genre}</p>
+                            <p>Duration: {movie.duration} minutes</p>
+                            <button>
+                                <Link to={`/movies/${movie.id}`}>Details</Link>
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
         </>
     );
 }

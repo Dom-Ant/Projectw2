@@ -21,7 +21,14 @@ function Movies() {
           window.location.reload();
         });
       };
-    
+    const [currentPage, setCurrentPage] = useState(1);
+    const moviesPerPage = 5;
+    const lastIndex = currentPage * moviesPerPage;
+    const firstIndex = lastIndex - moviesPerPage;
+    const movies = listOfMovies.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(listOfMovies.length / moviesPerPage);
+    const numbers = [...Array(npage + 1).keys()].slice(1);
+
     return (
       <div><center><h1>The List of All the Movies</h1></center>
       <div>
@@ -32,7 +39,7 @@ function Movies() {
             <tr><th>Movie Name</th><th>Genre</th><th>Duration</th><th colspan="2">Action</th></tr>
           </thead>
           <tbody>
-            {listOfMovies.map((value, key) => (
+            {movies.map((value, key) => (
               <tr>
                 <td>{value.title}</td><td>{value.genre}</td><td>{value.duration} min</td>
                 <td>
@@ -51,10 +58,44 @@ function Movies() {
             ))}
           </tbody>
         </table>
+            <center>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={prePage}>Previous Page
+              </button></div><br></br>
+            {
+              numbers.map((n, i) => (
+                <div className={`page-link ${currentPage === n ? 'active' : ''}`} key={i}>
+                  <button href="#" className="page-link page-item-btn"
+                  onClick={() => changeCPage(n)}
+                  >{n}</button>
+                </div>
+              ))
+            }<br></br>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={nextPage}>Next Page
+              </button></div>
+              </center>
       </div>
       </div>
       </div>
     );
+
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id);
+  }
+
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
 }
 
 export default Movies;

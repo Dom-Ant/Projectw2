@@ -21,7 +21,14 @@ function Tickets() {
           window.location.reload();
         });
       };
-    
+    const [currentPage, setCurrentPage] = useState(1);
+    const ticketsPerPage = 5;
+    const lastIndex = currentPage * ticketsPerPage;
+    const firstIndex = lastIndex - ticketsPerPage;
+    const tickets = listOfTickets.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(listOfTickets.length / ticketsPerPage);
+    const numbers = [...Array(npage + 1).keys()].slice(1);
+  
     return (
       <div><center><h1>The List of All the Tickets</h1></center>
       <div>
@@ -32,7 +39,7 @@ function Tickets() {
             <tr><th>Showtime ID</th><th>Ticket Price</th><th>Seat Number</th><th>User ID</th><th>Payment Status</th><th colspan="2">Action</th></tr>
           </thead>
           <tbody>
-            {listOfTickets.map((value, key) => (
+            {tickets.map((value, key) => (
               <tr>
                 <td>{value.showtime_id}</td><td>{value.ticket_price} $</td><td>{value.seat_number}</td><td>{value.user_id}</td><td>{value.payment_status}</td>
                 <td>
@@ -51,10 +58,44 @@ function Tickets() {
             ))}
           </tbody>
         </table>
+        <center>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={prePage}>Previous Page
+              </button></div><br></br>
+            {
+              numbers.map((n, i) => (
+                <div className={`page-link ${currentPage === n ? 'active' : ''}`} key={i}>
+                  <button href="#" className="page-link page-item-btn"
+                  onClick={() => changeCPage(n)}
+                  >{n}</button>
+                </div>
+              ))
+            }<br></br>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={nextPage}>Next Page
+              </button></div>
+              </center>
       </div>
       </div>
       </div>
     );
+    
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id);
+  }
+
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
 }
 
 export default Tickets;

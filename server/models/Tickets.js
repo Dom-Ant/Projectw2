@@ -19,8 +19,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         seat_number: {
+            /* type: DataTypes.STRING(10), */
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: 'Seats',
+                key: 'id'
+            }
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -31,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         payment_status: {
-            type: DataTypes.ENUM('Paid', 'Available'),
+            /* type: DataTypes.ENUM('Paid', 'Available'), */
+            type: DataTypes.ENUM('Pending', 'Paid', 'Failed', 'Refunded'),
             allowNull: false,
         }
     }, {
@@ -53,6 +59,12 @@ module.exports = (sequelize, DataTypes) => {
         Tickets.belongsTo(models.Users, { 
             foreignKey: 'user_id',
             as: 'user',
+            onDelete: 'CASCADE'
+        });
+
+        Tickets.belongsTo(models.Seats, {
+            foreignKey: 'seat_number',
+            as: 'seat',
             onDelete: 'CASCADE'
         });
     };

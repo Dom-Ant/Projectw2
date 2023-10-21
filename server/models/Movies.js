@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        poster_thumbnail_url: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         synopsis: {
             type: DataTypes.TEXT,
             allowNull: false,

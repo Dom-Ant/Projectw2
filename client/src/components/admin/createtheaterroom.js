@@ -11,6 +11,7 @@ function CreateTheaterRoom() {
         name: "",
         seat_capacity: "",
         venue_id: "",
+        seats_per_row: "",
     };
 
     // Validating the inputs:
@@ -18,6 +19,7 @@ function CreateTheaterRoom() {
         name: Yup.string().required(),
         seat_capacity: Yup.string().required(),
         venue_id: Yup.number().required().positive().integer(),
+        seats_per_row: Yup.number().required().positive().integer(),
     });
 
     const onSubmit = (data) => {
@@ -43,6 +45,9 @@ function CreateTheaterRoom() {
                     <label>Venue ID: </label>
                     <ErrorMessage name="venue_id" component="span"/>
                     <Field autocomplete="off" id="inputCreatePost" name="venue_id" placeholder="(Ex.1...)" />
+                    <label>Seats Per Row: </label>
+                    <ErrorMessage name="seats_per_row" component="span"/>
+                    <Field autocomplete="off" id="inputCreatePost" name="seats_per_row" placeholder="(Ex.5...)" />
                     <center><button type="submit">Add Theater Room</button></center>
                     <center><button onClick={()=> navigate("../admin/theaterrooms")}>Back</button></center>
                 </Form>

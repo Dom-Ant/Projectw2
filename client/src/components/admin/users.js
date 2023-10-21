@@ -21,6 +21,13 @@ function Users() {
       window.location.reload();
     });
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
+  const lastIndex = currentPage * usersPerPage;
+  const firstIndex = lastIndex - usersPerPage;
+  const users = listOfUsers.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(listOfUsers.length / usersPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
 
     return (
       <div><center><h1>The List of All the Users</h1></center>
@@ -30,7 +37,7 @@ function Users() {
             <tr><th>Username</th><th>Email</th><th>Role</th><th colspan="2">Action</th></tr>
           </thead>
           <tbody>
-            {listOfUsers.map((value, key) => (
+            {users.map((value, key) => (
               <tr>
                 <td>{value.username}</td><td>{value.email}</td><td>{value.role}</td>
                 <td>
@@ -49,9 +56,47 @@ function Users() {
             ))}
           </tbody>
         </table>
+
+
+        <center>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={prePage}>Previous Page
+              </button></div><br></br>
+            {
+              numbers.map((n, i) => (
+                <div className={`page-link ${currentPage === n ? 'active' : ''}`} key={i}>
+                  <button href="#" className="page-link page-item-btn"
+                  onClick={() => changeCPage(n)}
+                  >{n}</button>
+                </div>
+              ))
+            }<br></br>
+              <div><button href="#" className="page-link next-prev-btn"
+                onClick={nextPage}>Next Page
+              </button></div>
+              </center>
+
+
       </div>
       </div>
     );
+
+    function prePage() {
+      if (currentPage !== 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    }
+  
+    function changeCPage(id) {
+      setCurrentPage(id);
+    }
+  
+    function nextPage() {
+      if (currentPage !== npage) {
+        setCurrentPage(currentPage + 1);
+      }
+    }
+  
 }
 
 export default Users;

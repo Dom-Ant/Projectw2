@@ -1,27 +1,18 @@
 import React from 'react';
 import './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-
-// extract the role from the token and return it
-function useUserRole() {
-    const token = getStoredToken();
-    const decodeToken = token ? jwtDecode(token) : null;
-    return decodeToken ? decodeToken.role : null;
-}
-
-function getStoredToken() {
-    return localStorage.getItem('token');
-}
+import { useAuth } from '../authContext';
 
 function Header() {
+    const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
-    const userRole = useUserRole();
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        logout();
         navigate('/login');
     }
+
+    const userRole = currentUser?.role;
 
     return (
         <>
@@ -36,7 +27,7 @@ function Header() {
                 <button>My Tickets</button>
 
                 {/* conditional rendering (render only if true) */}
-                {!getStoredToken() && (
+                {!currentUser && (
                     <>
                     <button>
                         <Link to="/login">Login</Link>
@@ -53,7 +44,7 @@ function Header() {
                     </button>
                 )}
 
-                {getStoredToken() && (
+                {currentUser && (
                     <>
                     <button>My Profile</button>
                     <button onClick={handleLogout}>Logout</button>

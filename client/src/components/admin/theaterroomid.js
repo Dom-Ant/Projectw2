@@ -47,6 +47,13 @@ function TheaterRoomId() {
                         setChanged(true);
                         setTempTheaterRoomObject({...tempTheaterRoomObject, seat_capacity: e.target.value})
                     }}/>
+
+                    <label>Seats Per Row: </label>
+                    <input type="number" id="inputCreatePost" name="seats_per_row" value={tempTheaterRoomObject.seats_per_row || ''}
+                    onChange={(e) => {
+                        setChanged(true);
+                        setTempTheaterRoomObject({...tempTheaterRoomObject, seats_per_row: e.target.value});
+                    }}/>
                         <>
                             <center><button
                                 onClick={(e) => {

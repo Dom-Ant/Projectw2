@@ -1,22 +1,36 @@
 const upload = require('../helpers/upload.helper');
-const util = require('util');
+const sharp = require('sharp');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const s3Client = require('../utils/s3Client.js');
 
-exports.uploadSingle = (req, res) => {
-    // req.file contains a file object
-    res.json(req.file);
-}
+exports.uploadToS3 = async (req, res) => {
+    const file = req.file;
+    const key = Date.now().toString() + '-' + file.originalname;
+    const thumbnailKey = 'thumbnail-' + key;
 
-exports.uploadMultiple = (req, res) => {
-    // req.files contains an array of file object
-    res.json(req.files);
-}
+    // Generate thumbnail using sharp
+    const thumbnailBuffer = await sharp(file.buffer).resize(200).toBuffer();
 
-exports.uploadSingleV2 = async (req, res) => {
-    const uploadFile = util.promisify(upload.single('file'));
-    try {
-        await uploadFile(req, res); 
-        res.json(req.file);
-    } catch (error) { 
-        res.status(500).json({ message: error.message });
-    } 
-}
+    // Upload original image
+    const uploadParams = {
+        Bucket: '5-star-bucket',
+        Key: key,
+        Body: file.buffer,
+        ACL: 'public-read'
+    };
+    await s3Client.send(new PutObjectCommand(uploadParams));
+
+    // Upload thumbnail
+    const thumbnailUploadParams = {
+        Bucket: '5-star-bucket',
+        Key: thumbnailKey,
+        Body: thumbnailBuffer,
+        ACL: 'public-read'
+    };
+    await s3Client.send(new PutObjectCommand(thumbnailUploadParams));
+
+    const imageUrl = `https://5-star-bucket.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
+    const thumbnailUrl = `https://5-star-bucket.s3.${process.env.AWS_REGION}.amazonaws.com/${thumbnailKey}`;
+
+    res.send({ imageUrl, thumbnailUrl });
+};

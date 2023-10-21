@@ -1,3 +1,19 @@
+// generate seats for theatreroom
+const generateSeatCodes = (capacity, seatsPerRow) => {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let seatCodes = [];
+    let numberOfRows = Math.ceil(capacity / seatsPerRow);
+  
+    for (let row = 0; row < numberOfRows; row++) {
+      for (let col = 1; col <= seatsPerRow && (row * seatsPerRow + col) <= capacity; col++) {
+        let seatCode = `${alphabet[row]}${col}`;
+        seatCodes.push(seatCode);
+      }
+    }
+  
+    return seatCodes;
+  };
+
 module.exports = (sequelize, DataTypes) => {
     const TheaterRooms = sequelize.define("TheaterRooms", {
         id: {
@@ -22,10 +38,25 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        seats_per_row: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     }, {
         tableName: 'TheaterRooms',
         timestamps: false,
     });
+
+    TheaterRooms.afterCreate((theaterRoom, options) => {
+        const seatCodes = generateSeatCodes(theaterRoom.seat_capacity, theaterRoom.seats_per_row);
+        
+        const seatObjects = seatCodes.map(code => ({
+          room_id: theaterRoom.id,
+          seat_code: code
+        }));
+      
+        return sequelize.models.Seats.bulkCreate(seatObjects);
+      });
 
     TheaterRooms.associate = (models) => {
         TheaterRooms.belongsTo(models.Venues, {  
